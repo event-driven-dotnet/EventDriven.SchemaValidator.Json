@@ -9,11 +9,11 @@ namespace EventDriven.SchemaValidator.Json
     public class JsonSchemaValidator : ISchemaValidator
     {
         /// <inheritdoc />
-        public void ValidateSchema(string message, string schema, out IList<string> errorMessages)
+        public bool ValidateMessage(string message, string schema, out IList<string> errorMessages)
         {
             var jObject = JObject.Parse(message);
             var jSchema = JSchema.Parse(schema);
-            jObject.IsValid(jSchema, out errorMessages);
+            return jObject.IsValid(jSchema, out errorMessages);
         }
     }
 }
