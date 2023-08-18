@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <Authors>Tony Sneed</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIcon>eda-logo.jpeg</PackageIcon>
@@ -12,7 +12,7 @@
         <RepositoryUrl>https://github.com/event-driven-dotnet/EventDriven.SchemaValidator.Json.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>json-validation json event-driven event-driven-architecture</PackageTags>
-        <PackageReleaseNotes>https://github.com/event-driven-dotnet/EventDriven.SchemaValidator.Json/releases/tag/v1.1.0</PackageReleaseNotes>
+        <PackageReleaseNotes>https://github.com/event-driven-dotnet/EventDriven.SchemaValidator.Json/releases/tag/v1.1.1</PackageReleaseNotes>
         <PackageId>EventDriven.SchemaValidator.Json</PackageId>
         <RootNamespace>EventDriven.SchemaValidator.Json</RootNamespace>
     	<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -27,7 +27,7 @@
 
     <ItemGroup>
       <PackageReference Include="EventDriven.SchemaRegistry.Abstractions" Version="1.1.0" />
-      <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
+      <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" />
     </ItemGroup>
 
 </Project>
