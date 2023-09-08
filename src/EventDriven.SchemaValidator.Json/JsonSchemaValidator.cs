@@ -1,19 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
 using EventDriven.SchemaRegistry.Abstractions;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
+using NJsonSchema;
 
-namespace EventDriven.SchemaValidator.Json
+namespace EventDriven.SchemaValidator.Json;
+
+/// <inheritdoc />
+public class JsonSchemaValidator : ISchemaValidator
 {
     /// <inheritdoc />
-    public class JsonSchemaValidator : ISchemaValidator
+    public bool ValidateMessage(string message, string schema, out IList<string> errorMessages)
     {
-        /// <inheritdoc />
-        public bool ValidateMessage(string message, string schema, out IList<string> errorMessages)
-        {
-            var jObject = JObject.Parse(message);
-            var jSchema = JSchema.Parse(schema);
-            return jObject.IsValid(jSchema, out errorMessages);
-        }
+        var jsonSchema = JsonSchema.FromJsonAsync(schema).Result;
+        var errors = jsonSchema.Validate(message);
+        errorMessages = errors.Select(error => error.Path + ": " + error.Kind).ToList();
+        return !errors.Any();
     }
 }
