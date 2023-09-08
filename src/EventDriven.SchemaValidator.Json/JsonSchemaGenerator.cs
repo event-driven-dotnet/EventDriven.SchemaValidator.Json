@@ -1,29 +1,28 @@
 using System;
 using EventDriven.SchemaRegistry.Abstractions;
-using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using NJsonSchema;
+using NJsonSchema.Generation;
 
 namespace EventDriven.SchemaValidator.Json
 {
     /// <inheritdoc />
     public class JsonSchemaGenerator : ISchemaGenerator
     {
-        private readonly JSchemaGenerator _jsonSchemaGenerator;
-
-        /// <summary>
-        /// JsonSchemaGenerator constructor.`
-        /// </summary>
-        public JsonSchemaGenerator()
-        {
-            _jsonSchemaGenerator = new JSchemaGenerator
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName
-            };
-        }
-
         /// <inheritdoc />
-        public string GenerateSchema(Type messageType) => 
-            _jsonSchemaGenerator.Generate(messageType).ToString();
+        public string GenerateSchema(Type messageType) =>
+            JsonSchema.FromType(messageType, new JsonSchemaGeneratorSettings
+            {
+                SerializerSettings = new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    }
+                },
+                AlwaysAllowAdditionalObjectProperties = true
+            })
+            .ToJson();
     }
 }

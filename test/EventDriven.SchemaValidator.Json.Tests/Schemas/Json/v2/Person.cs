@@ -1,28 +1,25 @@
-namespace EventDriven.SchemaValidator.Json.Tests.Schemas.Json.v2
+namespace EventDriven.SchemaValidator.Json.Tests.Schemas.Json.v2;
+
+public static class Person
 {
-    public static class Person
-    {
-        public const string Expected = @"{
-  ""$id"": ""Person"",
+  public const string Expected = @"{
+  ""$schema"": ""http://json-schema.org/draft-04/schema#"",
+  ""title"": ""Person"",
   ""type"": ""object"",
+  ""required"": [
+    ""name""
+  ],
   ""properties"": {
     ""name"": {
-      ""type"": [
-        ""string"",
-        ""null""
-      ]
+      ""type"": ""string"",
+      ""minLength"": 1
     },
     ""planet"": {
       ""type"": [
-        ""string"",
-        ""null""
+        ""null"",
+        ""string""
       ]
     }
-  },
-  ""required"": [
-    ""name"",
-    ""planet""
-  ]
+  }
 }";
-    }
 }
